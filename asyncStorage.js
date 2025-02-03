@@ -5,6 +5,9 @@ const loadStateFromStorage = async () => {
     return state ? JSON.parse(state) : []
 }
 
+
 const saveStateToStorage = async (state) => {
     await AsyncStorage.setItem("shoppingLists", JSON.stringify(state))
 }
+
+export { loadStateFromStorage, saveStateToStorage }
