@@ -1,20 +1,15 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { Provider } from "react-redux";
+import { store } from "./store";
 import ShoppingListScreen from "./screens/shoppingListScreen";
-import ShoppingListDetail from "./screens/shoppingListDetail";
+import { PersistGate } from "redux-persist/integration/react";
 
-const Stack = createStackNavigator()
-
-function App() {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="ShoppingLists">
-                <Stack.Screen name="ShoppingLists" component={ShoppingListScreen} />
-                <Stack.Screen name="ShoppingListDetail" component={ShoppingListDetail} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
-}
+const App =() => (
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={store._persistor}>
+           <ShoppingListScreen /> 
+        </PersistGate>   
+    </Provider>
+)
 
 export default App
