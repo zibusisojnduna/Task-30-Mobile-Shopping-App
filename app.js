@@ -1,15 +1,12 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { store } from "./store";
-import ShoppingListScreen from "./screens/shoppingListScreen";
-import { PersistGate } from "redux-persist/integration/react";
+import React from 'react';
+import { Provider } from 'react-redux';
+import AppNavigator from './src/navigation/AppNavigator';
+import store from './src/redux/store';
 
-const App =() => (
+export default function App() {
+  return (
     <Provider store={store}>
-        <PersistGate loading={null} persistor={store._persistor}>
-           <ShoppingListScreen /> 
-        </PersistGate>   
+      <AppNavigator />
     </Provider>
-)
-
-export default App
+  );
+}

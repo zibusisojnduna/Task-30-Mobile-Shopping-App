@@ -1,13 +1,23 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const loadStateFromStorage = async () => {
-    const state = await AsyncStorage.getItem("shoppingLists")
-    return state ? JSON.parse(state) : []
-}
+const saveShoppingListsToStorage = async (shoppingLists) => {
+  try {
+    await AsyncStorage.setItem('@shopping_lists', JSON.stringify(shoppingLists));
+  } catch (e) {
+    console.error('Error saving data:', e);
+  }
+};
 
+export { saveShoppingListsToStorage, loadShoppingListsFromStorage };
 
-const saveStateToStorage = async (state) => {
-    await AsyncStorage.setItem("shoppingLists", JSON.stringify(state))
-}
+const loadShoppingListsFromStorage = async () => {
+  try {
+    const storedData = await AsyncStorage.getItem('@shopping_lists');
+    return storedData ? JSON.parse(storedData) : [];
+  } catch (e) {
+    console.error('Error loading data:', e);
+    return [];
+  }
+};
 
-export { loadStateFromStorage, saveStateToStorage }
+export default AsyncStorage;
